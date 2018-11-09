@@ -11,9 +11,9 @@ sudo pamcan -U linux-LTS+imx-headers-PixiePro-4.9.135-1-armv7h.pkg.tar.xz
 
 Modify your /boot/boot.txt to add these boot parameters and make a new bootscript:
 ```
-#in boot.txt, add the line below:
+#in boot.txt, change the line below:
 ...
-setenv apparmor=1 security=apparmor
+setenv display $display consoleblank=0 apparmor=1 security=apparmor
 ...
 
 #From /boot directory, generate the new bootscript:
