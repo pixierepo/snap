@@ -9,7 +9,18 @@ sudo pacman -U linux-LTS+imx-PixiePro-4.9.135-1-armv7h.pkg.tar.xz
 sudo pamcan -U linux-LTS+imx-headers-PixiePro-4.9.135-1-armv7h.pkg.tar.xz
 ```
 
-Install Snap dependencies:
+Modify your /boot/boot.txt to add these boot parameters and make a new bootscript:
+```
+#in boot.txt, add the line below:
+...
+setenv apparmor=1 security=apparmor
+...
+
+#From /boot directory, generate the new bootscript:
+sudo mkimage -A arm -T script -O linux -C none -d boot.txt boot.scr
+```
+
+Install snap dependencies:
 ```
 sudo pacman -S apparmor squashfs-tools go go-tools python-docutils
 ```
