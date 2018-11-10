@@ -16,7 +16,7 @@ Modify your /boot/boot.txt to add these boot parameters and make a new bootscrip
 setenv display $display consoleblank=0 apparmor=1 security=apparmor
 ...
 
-#From /boot directory, generate the new bootscript:
+#From /boot directory, generate the new bootscript (make sure you have uboot-tools installed):
 sudo mkimage -A arm -T script -O linux -C none -d boot.txt boot.scr
 ```
 
