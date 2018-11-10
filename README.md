@@ -1,5 +1,5 @@
 # snap
-Hardened kernel and modified snap profile to enable snap containerized packages on Pixieboard's Arch Linux.
+Hardened kernel and modified snap profile to enable execution of snap containerized packages on Pixieboard's Arch Linux.
 
 # Installation:
 
@@ -20,7 +20,7 @@ setenv display $display consoleblank=0 apparmor=1 security=apparmor
 sudo mkimage -A arm -T script -O linux -C none -d boot.txt boot.scr
 ```
 
-Install snap dependencies:
+Install missing dependencies:
 ```
 sudo pacman -S apparmor squashfs-tools go go-tools python-docutils
 ```
@@ -41,12 +41,24 @@ From the profiles directory, copy the profile to the correct directory:
 sudo cp usr.lib.snapd.snap-confine /etc/apparmor.d/
 ```
 
+Create a symlink to enable classic mode support:
+```
+sudo ln -s /var/lib/snapd/snap /snap
+```
+
+Enable snapd and apparmor services:
+```
+sudo systemctl enable snapd.socket
+sudo systemctl enable apparmor.service
+```
+
 Reboot your system.
 
 # Usage
 
 To test your system install the hello-world package using snap:
 ```
+#If you get a "Too early for operation" error just wait a few seconds and try again.
 sudo snap install hello-world
 ```
 
